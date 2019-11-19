@@ -1,0 +1,16 @@
+filebeat.inputs:
+  - type: container
+    paths:
+      - '/var/lib/docker/containers/*/*.log'
+    tail_files: true
+
+processors:
+  - add_kubernetes_metadata:
+      in_cluster: true
+  - add_cloud_metadata:
+
+output.logstash:
+  hosts: ['${LS_HOST}:${LS_PORT}']
+
+logging.json: true
+logging.metrics.enabled: false
