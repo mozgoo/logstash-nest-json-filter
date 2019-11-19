@@ -1,0 +1,1 @@
+Simple json parser for logstash
