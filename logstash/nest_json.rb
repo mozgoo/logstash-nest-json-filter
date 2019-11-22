@@ -8,9 +8,9 @@ end
 
 def parseHash(hash, nest_count=1)
   hash.each do |key, value|
-    if hash[key].is_a?(Hash)
-      if nest_count < @max_nest
-        parseHash(hash[key], nest_count+1)
+    if value.is_a?(Hash) 
+      if (nest_count < @max_nest) and (not value.kind_of?(Array))
+        parseHash(value, nest_count+1)
       else
         hash[key] = JSON.generate(value)
       end
